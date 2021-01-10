@@ -1,10 +1,10 @@
-package de.djetzen.mediakeeper
+package de.djetzen.yeartime
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MediakeeperApplicationTests {
+class YeartimeApplicationTests {
 
 	@Test
 	fun contextLoads() {

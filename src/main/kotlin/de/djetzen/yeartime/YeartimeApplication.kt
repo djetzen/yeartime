@@ -1,11 +1,11 @@
-package de.djetzen.mediakeeper
+package de.djetzen.yeartime
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MediakeeperApplication
+class YeartimeApplication
 
 fun main(args: Array<String>) {
-	runApplication<MediakeeperApplication>(*args)
+	runApplication<YeartimeApplication>(*args)
 }

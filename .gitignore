@@ -1,6 +1,6 @@
 # own additions
 *.gradle
-*.idea
+*.idea/
 *build/
 *.DS_Store
 
