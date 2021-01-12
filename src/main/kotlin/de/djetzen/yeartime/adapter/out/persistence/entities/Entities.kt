@@ -9,8 +9,8 @@ data class DayEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long? = null,
-    val date: LocalDate,
-    val user: String,
+    val dateOfDay: LocalDate,
+    val userName: String,
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
     val hourEntities: List<HourEntity> = listOf()
