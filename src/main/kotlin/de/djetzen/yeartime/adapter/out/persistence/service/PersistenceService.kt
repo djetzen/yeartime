@@ -22,10 +22,10 @@ class PersistenceService(val activityRepository: ActivityRepository, val dayRepo
     }
 
     fun findDayForUser(day: LocalDate, user: String): List<Day> {
-        return dayRepository.findDayByDateAndUser(day, user).map { dayEntity ->
+        return dayRepository.findDayByDateOfDayAndUserName(day, user).map { dayEntity ->
             Day(
-                dayEntity.date,
-                dayEntity.user,
+                dayEntity.dateOfDay,
+                dayEntity.userName,
                 dayEntity.hourEntities.map { hourEntity ->
                     Hour(
                         hourEntity.time,

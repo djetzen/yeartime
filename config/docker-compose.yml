@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12.5
+    environment:
+      POSTGRES_DB: yeartime
+      POSTGRES_USER: yeartime_user
+      POSTGRES_PASSWORD: yeartimepassword
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
