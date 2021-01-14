@@ -19,9 +19,9 @@ class ArchUnitOnionArchitectureTest {
         onionArchitecture()
             .domainModels("$BASE_PACKAGE.domain.models..")
             .domainServices("$BASE_PACKAGE.domain.services..")
-            .applicationServices("$BASE_PACKAGE.services..")
+            .applicationServices("$BASE_PACKAGE.application..")
             .adapter("persistence", "$BASE_PACKAGE.adapter.out.persistence..")
-            .adapter("rest", "$BASE_PACKAGE.rest..")
+            .adapter("rest", "$BASE_PACKAGE.adapter.in.web..")
             .withOptionalLayers(true)
             .check(classes)
     }
