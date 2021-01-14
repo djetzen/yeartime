@@ -13,7 +13,6 @@ import java.time.Year
 @RestController
 class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase) {
 
-    //TODO: only poc. not allowed to return domain model here
     @GetMapping("/{date}/{user}")
     @ResponseBody
     fun getDayForUser(
@@ -21,7 +20,7 @@ class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase)
         @PathVariable("user") user: String
     ): ResponseEntity<String> {
         var readDate = readSavedDataUseCase.readDayForUser(LocalDate.parse(date), user)
-        return ResponseEntity(readDate.toString(), HttpStatus.OK);
+        return ResponseEntity(DayApiBean(readDate.date, readDate.user).toString(), HttpStatus.OK);
     }
 
     @GetMapping("/year/{year}/{user}")

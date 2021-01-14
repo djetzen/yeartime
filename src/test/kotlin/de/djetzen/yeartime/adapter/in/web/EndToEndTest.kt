@@ -22,7 +22,7 @@ internal class EndToEndTest @Autowired constructor(
         mockMvc.perform(post("/save/2021-01-14/dummyUser")).andExpect(status().isOk).andReturn()
         var result =
             mockMvc.perform(get("/2021-01-14/dummyUser")).andExpect(status().isOk).andReturn().response.contentAsString
-        assertThat(result).isEqualTo("Day(date=2021-01-14, user=dummyUser, hours=[])");
+        assertThat(result).isEqualTo("DayApiBean(date=2021-01-14, user=dummyUser)");
     }
 
     @Test
