@@ -2,6 +2,8 @@ package de.djetzen.yeartime.adapter.out.persistence.service
 
 import de.djetzen.yeartime.adapter.out.persistence.repository.ActivityRepository
 import de.djetzen.yeartime.adapter.out.persistence.repository.DayRepository
+import de.djetzen.yeartime.application.port.out.LoadDataPort
+import de.djetzen.yeartime.application.port.out.SaveDataPort
 import de.djetzen.yeartime.domain.ActivityEntity
 import de.djetzen.yeartime.domain.DayEntity
 import de.djetzen.yeartime.domain.HourEntity
@@ -10,31 +12,32 @@ import de.djetzen.yeartime.domain.models.Day
 import de.djetzen.yeartime.domain.models.Hour
 import java.time.LocalDate
 
-class PersistenceService(val activityRepository: ActivityRepository, val dayRepository: DayRepository) {
+class PersistenceService(val activityRepository: ActivityRepository, val dayRepository: DayRepository) :
+    SaveDataPort, LoadDataPort {
 
-    fun findActivityByName(name: String): List<Activity> {
+    override fun findActivityByName(name: String): List<Activity> {
         return activityRepository.findActivityByName(name).map { Activity(it.name) };
     }
 
-    fun saveActivity(activity: Activity) {
+    override fun saveActivity(activity: Activity) {
         val activityEntity = ActivityEntity(activity.name)
         activityRepository.save(activityEntity);
     }
 
-    fun findDayForUser(day: LocalDate, user: String): List<Day> {
-        return dayRepository.findDayByDateOfDayAndUserName(day, user).map { dayEntity ->
-            Day(
-                dayEntity.dateOfDay,
-                dayEntity.userName,
-                dayEntity.hourEntities.map { hourEntity ->
-                    Hour(
-                        hourEntity.time,
-                        hourEntity.activityEntities.map { Activity(it.name) })
-                })
-        };
+    override fun findDayForUser(day: LocalDate, user: String): Day {
+
+        val dayEntity = dayRepository.findDayByDateOfDayAndUserName(day, user)
+        return Day(
+            dayEntity.dateOfDay,
+            dayEntity.userName,
+            dayEntity.hourEntities.map { hourEntity ->
+                Hour(
+                    hourEntity.time,
+                    hourEntity.activityEntities.map { Activity(it.name) })
+            })
     }
 
-    fun saveDay(day: Day) {
+    override fun saveDay(day: Day) {
         val dayEntitiy = DayEntity(
             null,
             day.date,
