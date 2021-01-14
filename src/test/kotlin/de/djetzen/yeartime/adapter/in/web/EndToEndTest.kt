@@ -24,4 +24,9 @@ internal class EndToEndTest @Autowired constructor(
             mockMvc.perform(get("/2021-01-14/dummyUser")).andExpect(status().isOk).andReturn().response.contentAsString
         assertThat(result).isEqualTo("Day(date=2021-01-14, user=dummyUser, hours=[])");
     }
+
+    @Test
+    fun callingYearEndpointThrowsNotImplementedCode() {
+        mockMvc.perform(get("/year/2021/dummyUser")).andExpect(status().isNotImplemented)
+    }
 }

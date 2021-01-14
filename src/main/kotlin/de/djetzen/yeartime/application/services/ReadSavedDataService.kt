@@ -13,6 +13,6 @@ class ReadSavedDataService(private val loadDataPort: LoadDataPort) : ReadSavedDa
     }
 
     override fun readYearForUser(year: Year, user: String): List<Day> {
-        TODO("not implemented yet")
+        return emptyList();
     }
 }
