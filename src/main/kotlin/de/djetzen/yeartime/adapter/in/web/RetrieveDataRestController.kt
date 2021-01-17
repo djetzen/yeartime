@@ -26,8 +26,7 @@ class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase)
                 DayApiBean(
                     readDate.date,
                     readDate.user,
-                    convertToHourApiBean(readDate.hours)
-
+                    convertToHourApiBean(readDate.hours).sortedBy { Integer.parseInt(it.time) }
                 )
             ),
             HttpStatus.OK
@@ -44,6 +43,6 @@ class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase)
     }
 
     private fun convertToHourApiBean(hourList: List<Hour>): List<HourApiBean> {
-        return hourList.map { h -> HourApiBean(h.time, ActivityApiBean(h.activities[0].name)) }.toList()
+        return hourList.map { h -> HourApiBean(h.time, ActivityApiBean(h.activity)) }.toList()
     }
 }

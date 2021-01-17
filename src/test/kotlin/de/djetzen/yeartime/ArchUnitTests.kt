@@ -4,6 +4,7 @@ import com.tngtech.archunit.base.DescribedPredicate
 import com.tngtech.archunit.core.domain.JavaAnnotation
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.library.Architectures.onionArchitecture
 import org.junit.jupiter.api.Test
@@ -17,7 +18,10 @@ class ArchUnitTests {
     private val BASE_PACKAGE: String = "de.djetzen.yeartime";
 
     private val classesWithoutConfigurationPackage =
-        ClassFileImporter().withImportOption(ignoreConfigurations).importPackages("$BASE_PACKAGE..")
+        ClassFileImporter()
+            .withImportOption(ignoreConfigurations)
+            .withImportOption(DoNotIncludeTests())
+            .importPackages("$BASE_PACKAGE..")
 
     @Test
     fun onionArchitecturePackageStructureIsFine() {

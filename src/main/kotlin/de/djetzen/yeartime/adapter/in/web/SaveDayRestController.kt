@@ -1,7 +1,6 @@
 package de.djetzen.yeartime.adapter.`in`.web
 
 import de.djetzen.yeartime.application.port.`in`.CaptureDayUseCase
-import de.djetzen.yeartime.domain.models.Activity
 import de.djetzen.yeartime.domain.models.Day
 import de.djetzen.yeartime.domain.models.Hour
 import org.springframework.http.HttpStatus
@@ -30,6 +29,6 @@ class SaveDayRestController(val captureDayUseCase: CaptureDayUseCase) {
     }
 
     private fun convertToHour(hourList: List<HourApiBean>): List<Hour> {
-        return hourList.map { h -> Hour(h.time, listOf(Activity(h.firstActivity.activity))) }.toList()
+        return hourList.map { h -> Hour(h.time, h.firstActivity.activity) }.toList()
     }
 }

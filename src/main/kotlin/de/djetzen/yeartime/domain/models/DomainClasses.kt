@@ -14,5 +14,5 @@ data class Day(
 
 data class Hour(
     val time: String,
-    val activities: List<Activity>
+    val activity: String
 )

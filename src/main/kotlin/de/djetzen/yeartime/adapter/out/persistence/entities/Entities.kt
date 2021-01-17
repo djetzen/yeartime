@@ -13,14 +13,7 @@ data class DayEntity(
     val userName: String,
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
-    val hourEntities: List<HourEntity> = listOf()
-)
-
-@Entity
-@Table(name = "activity")
-data class ActivityEntity(
-    @Id
-    val name: String
+    val hourEntities: Set<HourEntity> = setOf()
 )
 
 @Entity
@@ -30,6 +23,5 @@ data class HourEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long? = null,
     val time: String,
-    @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
-    val activityEntities: List<ActivityEntity>
+    val activity: String
 )

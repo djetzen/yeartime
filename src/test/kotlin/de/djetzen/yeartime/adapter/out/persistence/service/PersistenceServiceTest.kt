@@ -1,6 +1,5 @@
 package de.djetzen.yeartime.adapter.out.persistence.service
 
-import de.djetzen.yeartime.domain.models.Activity
 import de.djetzen.yeartime.domain.models.Day
 import de.djetzen.yeartime.domain.models.Hour
 import org.assertj.core.api.Assertions.assertThat
@@ -22,29 +21,19 @@ internal class PersistenceServiceTest @Autowired constructor(
 ) {
 
     @Test
-    fun savedActivityEntityIsReadable() {
-        val activity = Activity(SAMPLE_ACTIVITY)
-        persistenceService.saveActivity(activity)
-        var foundActivitiesByName = persistenceService.findActivityByName(SAMPLE_ACTIVITY)
-
-        assertThat(foundActivitiesByName).hasSize(1);
-        assertThat(foundActivitiesByName[0].name).isEqualTo(SAMPLE_ACTIVITY);
-    }
-
-    @Test
     fun savedDayEntityIsReadableAndHourAndActivityIsSavedAsWell() {
-        val hour = Hour("12", listOf(Activity(SAMPLE_ACTIVITY)))
+        val hour = Hour("12", SAMPLE_ACTIVITY)
         val day = Day(LocalDate.now(), SAMPLE_USER, listOf(hour));
         persistenceService.saveDay(day);
         val foundDayByName = persistenceService.findDayForUser(LocalDate.now(), SAMPLE_USER);
-        val foundActivityByName = persistenceService.findActivityByName(SAMPLE_ACTIVITY)
 
         assertThat(foundDayByName.date).isEqualTo(LocalDate.now())
         assertThat(foundDayByName.hours).hasSize(1)
         assertThat(foundDayByName.user).isEqualTo(SAMPLE_USER)
 
-        assertThat(foundActivityByName).hasSize(1)
-        assertThat(foundActivityByName[0].name).isEqualTo(SAMPLE_ACTIVITY)
+        assertThat(foundDayByName.hours).hasSize(1)
+        assertThat(foundDayByName.hours[0].activity).isEqualTo(SAMPLE_ACTIVITY)
+
     }
 
 }
