@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
-import java.time.Year
 
 @RestController
 class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase) {
@@ -29,7 +28,6 @@ class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase)
         @PathVariable("year") year: Int,
         @PathVariable("user") user: String
     ): ResponseEntity<String> {
-        var readDate = readSavedDataUseCase.readYearForUser(Year.of(year), user)
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 }
