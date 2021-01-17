@@ -1,6 +1,9 @@
 package de.djetzen.yeartime.adapter.`in`.web
 
 import de.djetzen.yeartime.application.port.`in`.ReadSavedDataUseCase
+import de.djetzen.yeartime.domain.models.Hour
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,13 +16,21 @@ import java.time.LocalDate
 class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase) {
 
     @GetMapping("/{date}/{user}")
-    @ResponseBody
     fun getDayForUser(
         @PathVariable("date") date: String,
         @PathVariable("user") user: String
     ): ResponseEntity<String> {
         var readDate = readSavedDataUseCase.readDayForUser(LocalDate.parse(date), user)
-        return ResponseEntity(DayApiBean(readDate.date, readDate.user).toString(), HttpStatus.OK);
+        return ResponseEntity(
+            Json.encodeToString(
+                DayApiBean(
+                    readDate.date,
+                    readDate.user,
+                    convertToHourApiBean(readDate.hours).sortedBy { Integer.parseInt(it.time) }
+                )
+            ),
+            HttpStatus.OK
+        );
     }
 
     @GetMapping("/year/{year}/{user}")
@@ -29,5 +40,9 @@ class RetrieveDataRestController(val readSavedDataUseCase: ReadSavedDataUseCase)
         @PathVariable("user") user: String
     ): ResponseEntity<String> {
         return ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    private fun convertToHourApiBean(hourList: List<Hour>): List<HourApiBean> {
+        return hourList.map { h -> HourApiBean(h.time, ActivityApiBean(h.activity)) }.toList()
     }
 }
