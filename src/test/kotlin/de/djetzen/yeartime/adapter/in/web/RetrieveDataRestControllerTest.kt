@@ -32,8 +32,8 @@ internal class RetrieveDataRestControllerTest {
                     "dummyUser", RestControllerTestUtils.createHoursListForTest("skiing")
                 )
             )
-        
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/2021-01-14/dummyUser"))
+
+        val result = mockMvc.perform(MockMvcRequestBuilders.get("/2021-01-14/dummyUser"))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andReturn().response.contentAsString
 
@@ -42,6 +42,12 @@ internal class RetrieveDataRestControllerTest {
                 RestControllerTestUtils.createHoursJsonForTest("skiing")
             }]}"
         );
+    }
+
+    @Test
+    fun callingYearEndpointThrowsNotImplementedCode() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/year/2021/dummyUser"))
+            .andExpect(MockMvcResultMatchers.status().isNotImplemented)
     }
 
 

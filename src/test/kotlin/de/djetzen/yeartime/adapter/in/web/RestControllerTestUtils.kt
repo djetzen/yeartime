@@ -9,6 +9,10 @@ class RestControllerTestUtils {
             return MutableList(24) { index -> Hour(index.toString(), listOf(Activity(activity))) }
         }
 
+        fun createHoursApiBeanListForTest(activity: String): List<HourApiBean> {
+            return MutableList(24) { index -> HourApiBean(index.toString(), ActivityApiBean(activity)) }
+        }
+
         fun createHoursJsonForTest(activity: String): String {
             var expectation = "";
             for (i in 0..23) {
