@@ -1,6 +1,17 @@
-# Yeartime
+#### CodeCoverage from CodeCov
 
 ![Code Coverage](https://codecov.io/gh/djetzen/yeartime/branch/main/graphs/badge.svg?branch=main)
+
+#### SonarCloud analysis:
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=bugs)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=code_smells)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=ncloc)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=sqale_index)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=djetzen_yeartime&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=djetzen_yeartime)
+
+# Yeartime
 
 This repository contains a small backend for capturing what you have done on a specific day. I saw this kind of activity
 tracking on reddit and started doing it in excel. As I am not very familiar with excel I decided to implement a small
