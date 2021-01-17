@@ -20,9 +20,11 @@ internal class EndToEndTest @Autowired constructor(
     @Test
     fun saveDayWithNoDataCanBeRetrieved() {
         mockMvc.perform(post("/save/2021-01-14/dummyUser")).andExpect(status().isOk).andReturn()
-        var result =
+
+        val result =
             mockMvc.perform(get("/2021-01-14/dummyUser")).andExpect(status().isOk).andReturn().response.contentAsString
-        assertThat(result).isEqualTo("DayApiBean(date=2021-01-14, user=dummyUser)");
+
+        assertThat(result).isEqualTo("{\"date\":\"2021-01-14\",\"user\":\"dummyUser\"}");
     }
 
     @Test

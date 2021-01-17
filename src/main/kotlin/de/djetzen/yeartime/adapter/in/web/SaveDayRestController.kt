@@ -14,7 +14,7 @@ class SaveDayRestController(val captureDayUseCase: CaptureDayUseCase) {
 
     @PostMapping("/save/{date}/{user}")
     fun saveDay(@PathVariable("date") date: String, @PathVariable("user") user: String): ResponseEntity<String> {
-        val day: Day = Day(LocalDate.parse(date), user, listOf())
+        val day = Day(LocalDate.parse(date), user, listOf())
         captureDayUseCase.captureDay(day)
         return ResponseEntity(HttpStatus.OK);
     }
