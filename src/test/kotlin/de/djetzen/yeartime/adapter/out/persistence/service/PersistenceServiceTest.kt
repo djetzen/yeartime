@@ -27,7 +27,7 @@ internal class PersistenceServiceTest @Autowired constructor(
         persistenceService.saveDay(day);
         val foundDayByName = persistenceService.findDayForUser(LocalDate.now(), SAMPLE_USER);
 
-        assertThat(foundDayByName.date).isEqualTo(LocalDate.now())
+        assertThat(foundDayByName!!.date).isEqualTo(LocalDate.now())
         assertThat(foundDayByName.hours).hasSize(1)
         assertThat(foundDayByName.user).isEqualTo(SAMPLE_USER)
 

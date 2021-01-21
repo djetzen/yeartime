@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.time.LocalDate
+import java.time.Year
 
 @WebMvcTest(RetrieveDataRestController::class)
 @AutoConfigureMockMvc
@@ -45,9 +46,32 @@ internal class RetrieveDataRestControllerTest {
     }
 
     @Test
-    fun callingYearEndpointThrowsNotImplementedCode() {
-        mockMvc.perform(MockMvcRequestBuilders.get("/year/2021/dummyUser"))
-            .andExpect(MockMvcResultMatchers.status().isNotImplemented)
+    fun ifNoDayPresentReturn204() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/2021-01-14/dummyUser"))
+            .andExpect(MockMvcResultMatchers.status().isNoContent).andReturn().response.contentAsString
+    }
+
+    @Test
+    fun callingYearEndpointReturnsAllDaysInYear() {
+        Mockito.`when`(readSavedDataUseCase.readYearForUser(Year.of(2021), "dummyUser")).thenReturn(
+            listOf(
+                Day(LocalDate.of(2021, 1, 14), "dummyUser", RestControllerTestUtils.createHoursListForTest("skiing")),
+                Day(LocalDate.of(2021, 1, 15), "dummyUser", RestControllerTestUtils.createHoursListForTest("sleeping")),
+                Day(LocalDate.of(2021, 1, 16), "dummyUser", RestControllerTestUtils.createHoursListForTest("gaming"))
+            )
+        )
+
+        val responseFromYearEndpoint = mockMvc.perform(MockMvcRequestBuilders.get("/year/2021/dummyUser"))
+            .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
+
+        assertThat(responseFromYearEndpoint).isEqualTo(
+            "[{\"date\":\"2021-01-14\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
+                    "[${RestControllerTestUtils.createHoursJsonForTest("skiing")}]},{" +
+                    "\"date\":\"2021-01-15\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
+                    "[${RestControllerTestUtils.createHoursJsonForTest("sleeping")}]},{" +
+                    "\"date\":\"2021-01-16\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
+                    "[${RestControllerTestUtils.createHoursJsonForTest("gaming")}]" + "}]"
+        );
     }
 
 
