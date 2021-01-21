@@ -7,12 +7,13 @@ import javax.persistence.*
 @Table(name = "day")
 data class DayEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long?,
     val dateOfDay: LocalDate,
     val userName: String,
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+    @JoinColumn(name = "day_id", referencedColumnName = "id")
     val hourEntities: Set<HourEntity> = setOf()
 )
 
@@ -20,8 +21,8 @@ data class DayEntity(
 @Table(name = "hour")
 data class HourEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long?,
     val time: String,
     val activity: String
 )

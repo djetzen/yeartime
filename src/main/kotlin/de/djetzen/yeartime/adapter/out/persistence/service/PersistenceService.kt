@@ -28,12 +28,12 @@ class PersistenceService(val dayRepository: DayRepository) :
     }
 
     override fun saveDay(day: Day) {
-        val dayEntitiy = DayEntity(
+        val dayEntity = DayEntity(
             null,
             day.date,
             day.user,
             day.hours.map { HourEntity(null, it.time, it.activity) }.toSet()
         )
-        dayRepository.save(dayEntitiy);
+        dayRepository.save(dayEntity);
     }
 }
