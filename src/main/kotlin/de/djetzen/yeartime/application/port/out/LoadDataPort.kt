@@ -4,5 +4,5 @@ import de.djetzen.yeartime.domain.models.Day
 import java.time.LocalDate
 
 interface LoadDataPort {
-    fun findDayForUser(day: LocalDate, user: String): Day
+    fun findDayForUser(day: LocalDate, user: String): Day?
 }

@@ -12,9 +12,9 @@ import java.time.LocalDate
 class PersistenceService(val dayRepository: DayRepository) :
     SaveDataPort, LoadDataPort {
 
-    override fun findDayForUser(day: LocalDate, user: String): Day {
+    override fun findDayForUser(day: LocalDate, user: String): Day? {
 
-        val dayEntity = dayRepository.findDayByDateOfDayAndUserName(day, user)
+        val dayEntity = dayRepository.findDayByDateOfDayAndUserName(day, user) ?: return null
         return Day(
             dayEntity.dateOfDay,
             dayEntity.userName,
