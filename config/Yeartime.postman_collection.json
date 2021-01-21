@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "3299d901-4daf-46cb-b9f1-21477d132831",
+		"name": "Yeartime",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Year for User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/year/2021/dummyUser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"year",
+						"2021",
+						"dummyUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Day for User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/2021-01-14/dummyUser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2021-01-14",
+						"dummyUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save day for User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2021-01-14\",\n    \"user\": \"dummyUser\",\n    \"hoursWithActivities\": [\n        {\n            \"time\": \"0\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"1\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"2\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"3\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"4\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"5\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"6\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"7\",\n            \"firstActivity\": {\n                \"activity\": \"sleeping\"\n            }\n        },\n        {\n            \"time\": \"8\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"9\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"10\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"11\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"12\",\n            \"firstActivity\": {\n                \"activity\": \"skiing\"\n            }\n        },\n        {\n            \"time\": \"13\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"14\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"15\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"16\",\n            \"firstActivity\": {\n                \"activity\": \"working\"\n            }\n        },\n        {\n            \"time\": \"17\",\n            \"firstActivity\": {\n                \"activity\": \"reading\"\n            }\n        },\n        {\n            \"time\": \"18\",\n            \"firstActivity\": {\n                \"activity\": \"sports\"\n            }\n        },\n        {\n            \"time\": \"19\",\n            \"firstActivity\": {\n                \"activity\": \"watching\"\n            }\n        },\n        {\n            \"time\": \"20\",\n            \"firstActivity\": {\n                \"activity\": \"watching\"\n            }\n        },\n        {\n            \"time\": \"21\",\n            \"firstActivity\": {\n                \"activity\": \"watching\"\n            }\n        },\n        {\n            \"time\": \"22\",\n            \"firstActivity\": {\n                \"activity\": \"internet\"\n            }\n        },\n        {\n            \"time\": \"23\",\n            \"firstActivity\": {\n                \"activity\": \"internet\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/save/2021-01-14/dummyUser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"save",
+						"2021-01-14",
+						"dummyUser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
