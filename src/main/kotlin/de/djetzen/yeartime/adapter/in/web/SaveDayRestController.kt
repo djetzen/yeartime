@@ -1,5 +1,6 @@
 package de.djetzen.yeartime.adapter.`in`.web
 
+import de.djetzen.yeartime.adapter.out.persistence.service.KonfliktInStoreException
 import de.djetzen.yeartime.application.port.`in`.CaptureDayUseCase
 import de.djetzen.yeartime.domain.models.Day
 import de.djetzen.yeartime.domain.models.Hour
@@ -15,17 +16,17 @@ import java.time.LocalDate
 class SaveDayRestController(val captureDayUseCase: CaptureDayUseCase) {
 
     @PostMapping("/save/{date}/{user}")
-    fun saveDay(
-        @PathVariable("date") date: String,
-        @PathVariable("user") user: String,
-        @RequestBody dayApiBean: DayApiBean?
-    ): ResponseEntity<String> {
-        if (dayApiBean == null) {
-            return ResponseEntity(HttpStatus.BAD_REQUEST)
+    fun saveDay(@PathVariable("date") date: String, @PathVariable("user") user: String, @RequestBody dayApiBean: DayApiBean?): ResponseEntity<String> {
+        try {
+            if (dayApiBean == null) {
+                return ResponseEntity(HttpStatus.BAD_REQUEST)
+            }
+            val day = Day(LocalDate.parse(date), user, convertToHour(dayApiBean.hoursWithActivities))
+            captureDayUseCase.captureDay(day)
+            return ResponseEntity("successfully created day with ${day.date} for user ${day.user}", HttpStatus.OK);
+        } catch (e: KonfliktInStoreException) {
+            return ResponseEntity(HttpStatus.CONFLICT);
         }
-        val day = Day(LocalDate.parse(date), user, convertToHour(dayApiBean.hoursWithActivities))
-        captureDayUseCase.captureDay(day)
-        return ResponseEntity("successfully created day with ${day.date} for user ${day.user}", HttpStatus.OK);
     }
 
     private fun convertToHour(hourList: List<HourApiBean>): List<Hour> {

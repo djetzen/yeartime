@@ -28,11 +28,14 @@ class PersistenceService(val dayRepository: DayRepository) :
     }
 
     override fun saveDay(day: Day) {
+        if (dayRepository.findDayByDateOfDayAndUserName(day.date, day.user) != null) {
+            throw KonfliktInStoreException()
+        }
         val dayEntity = DayEntity(
-            null,
-            day.date,
-            day.user,
-            day.hours.map { HourEntity(null, it.time, it.activity) }.toSet()
+                null,
+                day.date,
+                day.user,
+                day.hours.map { HourEntity(null, it.time, it.activity) }.toSet()
         )
         dayRepository.save(dayEntity);
     }

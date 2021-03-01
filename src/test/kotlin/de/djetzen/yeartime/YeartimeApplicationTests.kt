@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,7 +21,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 class YeartimeApplicationTests @Autowired constructor(
     val mockMvc: MockMvc
 ) {
-    val SIMPLE_DAY_INPUT = "{\"date\":\"2021-01-14\",\"user\":\"dummyUser\",\"hoursWithActivities\":[${
+    final val SIMPLE_DAY_LITERAL = "2021-01-14"
+
+    val SIMPLE_DAY_INPUT = "{\"date\":\"" + SIMPLE_DAY_LITERAL + "\",\"user\":\"dummyUser\",\"hoursWithActivities\":[${
         RestControllerTestUtils.createHoursJsonForTest("skiing")
     }]}"
     val ANOTHER_DAY = "{\"date\":\"2021-01-15\",\"user\":\"dummyUser\",\"hoursWithActivities\":[${
@@ -31,40 +34,50 @@ class YeartimeApplicationTests @Autowired constructor(
         RestControllerTestUtils.createHoursJsonForTest("skiing")
     }]}"
 
-
     @Test
+    @Transactional
     fun savingDayCanBeRetrievedAfterwards() {
-        saveDay("2021-01-14", SIMPLE_DAY_INPUT)
-        val retrievedDay = mockMvc.perform(MockMvcRequestBuilders.get("/2021-01-14/dummyUser"))
-            .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
+        saveDay(SIMPLE_DAY_LITERAL, SIMPLE_DAY_INPUT)
+        val retrievedDay = mockMvc.perform(MockMvcRequestBuilders.get("/$SIMPLE_DAY_LITERAL/dummyUser"))
+                .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
 
         assertThat(retrievedDay).isEqualTo(
-            "{\"date\":\"2021-01-14\",\"user\":\"dummyUser\",\"hoursWithActivities\":[${
-                RestControllerTestUtils.createHoursJsonForTest("skiing")
-            }]}"
+                "{\"date\":\"" + SIMPLE_DAY_LITERAL + "\",\"user\":\"dummyUser\",\"hoursWithActivities\":[${
+                    RestControllerTestUtils.createHoursJsonForTest("skiing")
+                }]}"
         );
     }
 
     @Test
+    @Transactional
     fun savingDaysFromTwoDifferentYearsReturnsOnYearEndpointOnlyDayFromGivenYear() {
-        saveDay("2021-01-14", SIMPLE_DAY_INPUT)
+        saveDay(SIMPLE_DAY_LITERAL, SIMPLE_DAY_INPUT)
         saveDay("2021-01-15", ANOTHER_DAY)
         saveDay("2020-01-14", SIMPLE_DAY_INPUT_OTHER_YEAR)
         val retrievedDaysFromYear = mockMvc.perform(MockMvcRequestBuilders.get("/year/2021/dummyUser"))
-            .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
+                .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
         assertThat(retrievedDaysFromYear).isEqualTo(
-            "[{\"date\":\"2021-01-14\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
-                    "[${RestControllerTestUtils.createHoursJsonForTest("skiing")}]},{" +
-                    "\"date\":\"2021-01-15\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
-                    "[${RestControllerTestUtils.createHoursJsonForTest("gaming")}]" + "}]"
+                "[{\"date\":\"" + SIMPLE_DAY_LITERAL + "\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
+                        "[${RestControllerTestUtils.createHoursJsonForTest("skiing")}]},{" +
+                        "\"date\":\"2021-01-15\",\"user\":\"dummyUser\",\"hoursWithActivities\":" +
+                        "[${RestControllerTestUtils.createHoursJsonForTest("gaming")}]" + "}]"
         );
+
+    }
+
+    @Test
+    @Transactional
+    fun savingDuplicateDayIsRejected() {
+        saveDay(SIMPLE_DAY_LITERAL, SIMPLE_DAY_INPUT)
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/save/$SIMPLE_DAY_LITERAL/dummyUser").contentType(MediaType.APPLICATION_JSON).content(SIMPLE_DAY_INPUT)
+        ).andExpect(MockMvcResultMatchers.status().isConflict).andReturn()
 
     }
 
     fun saveDay(day: String, content: String) {
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/save/$day/dummyUser").contentType(MediaType.APPLICATION_JSON).content(content)
+                MockMvcRequestBuilders.post("/save/$day/dummyUser").contentType(MediaType.APPLICATION_JSON).content(content)
         ).andExpect(MockMvcResultMatchers.status().isOk).andReturn()
     }
-
 }
