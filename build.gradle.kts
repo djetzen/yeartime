@@ -6,9 +6,9 @@ plugins {
 	id("org.flywaydb.flyway") version "7.5.4"
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.4.31"
 	jacoco
-	kotlin("plugin.serialization") version "1.4.21"
-	kotlin("plugin.spring") version "1.4.21"
-	kotlin("jvm") version "1.4.21"
+	kotlin("plugin.serialization") version "1.4.31"
+	kotlin("plugin.spring") version "1.4.31"
+	kotlin("jvm") version "1.4.31"
 
 }
 
@@ -26,7 +26,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.projectlombok:lombok:1.18.18")
 	implementation("org.flywaydb:flyway-core")
