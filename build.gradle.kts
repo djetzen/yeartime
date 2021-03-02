@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.4.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	id("org.flywaydb.flyway") version "7.5.0"
+	id("org.flywaydb.flyway") version "7.5.4"
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.4.21"
 	jacoco
 	kotlin("plugin.serialization") version "1.4.21"
@@ -28,7 +28,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.projectlombok:lombok:1.18.16")
+	implementation("org.projectlombok:lombok:1.18.18")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.postgresql:postgresql:42.2.18")
 	testImplementation("com.h2database:h2")
