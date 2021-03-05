@@ -10,14 +10,22 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
-    name: Lint
+  hadolint:
+    name: Hadolint
     runs-on: ubuntu-20.04
     container: pipelinecomponents/hadolint:0.10.0
     steps:
       - uses: actions/checkout@v2
       - name: Run hadolint
         run: hadolint Dockerfile
+  jsonlint:
+    name: jsonLint
+    runs-on: ubuntu-20.04
+    container: pipelinecomponents/jsonlint:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run jsonlint
+        run: find . -not -path './.git/*' -name '*.json' -type f -print0 | parallel --will-cite -k -0 -n1 jsonlint -q
   build:
     runs-on: ubuntu-latest
     steps:
