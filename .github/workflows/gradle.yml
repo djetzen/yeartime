@@ -10,10 +10,16 @@ on:
     branches: [ main ]
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    container: pipelinecomponents/hadolint:0.10.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run hadolint
+        run: hadolint Dockerfile
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.11
