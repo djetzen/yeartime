@@ -26,6 +26,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run jsonlint
         run: find . -not -path './.git/*' -name '*.json' -type f -print0 | parallel --will-cite -k -0 -n1 jsonlint -q
+  yamllint:
+    name: yamllint
+    runs-on: ubuntu-20.04
+    container: pipelinecomponents/yamllint:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run yamllint
+        run: yamllint .
+
   build:
     runs-on: ubuntu-latest
     steps:
