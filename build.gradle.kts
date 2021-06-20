@@ -4,7 +4,7 @@ plugins {
 	id("org.springframework.boot") version "2.5.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("org.flywaydb.flyway") version "7.10.0"
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.5.0"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.5.10"
 	jacoco
 	kotlin("plugin.serialization") version "1.4.31"
 	kotlin("plugin.spring") version "1.4.31"
@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.2.22")
 	testImplementation("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("com.tngtech.archunit:archunit-junit5:0.18.0")
+	testImplementation("com.tngtech.archunit:archunit-junit5:0.19.0")
 }
 
 tasks.withType<KotlinCompile> {
