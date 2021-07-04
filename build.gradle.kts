@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.2.22")
 	testImplementation("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("com.tngtech.archunit:archunit-junit5:0.19.0")
+	testImplementation("com.tngtech.archunit:archunit-junit5:0.20.0")
 }
 
 tasks.withType<KotlinCompile> {
