@@ -1,3 +1,5 @@
+trigger build for change of sonarqube rules
+
 #### CodeCoverage from CodeCov
 
 ![Code Coverage](https://codecov.io/gh/djetzen/yeartime/branch/main/graphs/badge.svg?branch=main)
