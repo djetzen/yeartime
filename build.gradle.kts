@@ -6,7 +6,7 @@ plugins {
 	id("org.flywaydb.flyway") version "8.0.4"
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.5.31"
 	jacoco
-	kotlin("plugin.serialization") version "1.5.31"
+	kotlin("plugin.serialization") version "1.6.0"
 	kotlin("plugin.spring") version "1.5.31"
 	kotlin("jvm") version "1.6.0"
 
