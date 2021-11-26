@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.6.0"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	id("org.flywaydb.flyway") version "8.0.5"
+	id("org.flywaydb.flyway") version "8.1.0"
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.6.0"
 	jacoco
 	kotlin("plugin.serialization") version "1.6.0"
