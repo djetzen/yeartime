@@ -28,7 +28,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.projectlombok:lombok:1.18.22")
+	implementation("org.projectlombok:lombok:1.18.24")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.postgresql:postgresql:42.3.1")
 	testImplementation("com.h2database:h2")
