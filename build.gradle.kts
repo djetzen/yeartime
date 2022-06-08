@@ -8,7 +8,7 @@ plugins {
 	jacoco
 	kotlin("plugin.serialization") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
-	kotlin("jvm") version "1.6.21"
+	kotlin("jvm") version "1.7.0"
 
 }
 
@@ -30,7 +30,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.projectlombok:lombok:1.18.24")
 	implementation("org.flywaydb:flyway-core")
-	implementation("org.postgresql:postgresql:42.3.1")
+	implementation("org.postgresql:postgresql:42.3.6")
 	testImplementation("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("com.tngtech.archunit:archunit-junit5:0.23.1")
