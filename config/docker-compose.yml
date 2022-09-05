@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   postgres:
-    image: postgres:14.3
+    image: postgres:14.5
     environment:
       POSTGRES_DB: yeartime
       POSTGRES_USER: yeartime_user
