@@ -4,7 +4,7 @@ plugins {
 	id("org.springframework.boot") version "2.6.2"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("org.flywaydb.flyway") version "8.5.12"
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.0"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.10"
 	jacoco
 	kotlin("plugin.serialization") version "1.7.10"
 	kotlin("plugin.spring") version "1.7.10"
