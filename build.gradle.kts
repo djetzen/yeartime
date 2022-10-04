@@ -4,11 +4,11 @@ plugins {
 	id("org.springframework.boot") version "2.6.2"
 	id("io.spring.dependency-management") version "1.0.14.RELEASE"
 	id("org.flywaydb.flyway") version "9.4.0"
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.10"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.20"
 	jacoco
-	kotlin("plugin.serialization") version "1.7.10"
-	kotlin("plugin.spring") version "1.7.10"
-	kotlin("jvm") version "1.7.10"
+	kotlin("plugin.serialization") version "1.7.20"
+	kotlin("plugin.spring") version "1.7.20"
+	kotlin("jvm") version "1.7.20"
 
 }
 
