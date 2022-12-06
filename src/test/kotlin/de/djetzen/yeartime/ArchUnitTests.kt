@@ -52,8 +52,9 @@ class ArchUnitTests {
     fun domainPackageShouldHaveNoDependenciesToSpring() {
         val springAnnotationPredicate: DescribedPredicate<JavaAnnotation<*>?> =
             object : DescribedPredicate<JavaAnnotation<*>?>("Filter for org.spring package") {
-                override fun test(t: JavaAnnotation<*>?): Boolean {
-                    return t!!.type.name.startsWith("org.spring")
+
+                override fun apply(input: JavaAnnotation<*>?): Boolean {
+                    return input!!.type.name.startsWith("org.spring")
                 }
             }
         ArchRuleDefinition.classes().that().resideInAPackage("..domain..").should()
