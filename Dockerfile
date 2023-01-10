@@ -1,4 +1,4 @@
-FROM openjdk:17.0.2
+FROM openjdk:21
 EXPOSE 8080
 WORKDIR /
 COPY ./build/libs/*.jar app.jar
