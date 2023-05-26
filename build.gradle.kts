@@ -7,7 +7,7 @@ plugins {
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.22"
 	jacoco
 	kotlin("plugin.serialization") version "1.8.21"
-	kotlin("plugin.spring") version "1.7.22"
+	kotlin("plugin.spring") version "1.8.21"
 	kotlin("jvm") version "1.8.21"
 
 }
