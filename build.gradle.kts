@@ -8,7 +8,7 @@ plugins {
 	jacoco
 	kotlin("plugin.serialization") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
-	kotlin("jvm") version "1.7.22"
+	kotlin("jvm") version "1.8.21"
 
 }
 
