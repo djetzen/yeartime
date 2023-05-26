@@ -30,7 +30,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.projectlombok:lombok:1.18.26")
 	implementation("org.flywaydb:flyway-core")
-	implementation("org.postgresql:postgresql:42.5.1")
+	implementation("org.postgresql:postgresql:42.6.0")
 	testImplementation("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
